@@ -1,0 +1,538 @@
+/*
+ * Author       : thamizhselvan.vs.2024.cse
+ * Generated on : 11-Nov-2026 11:14:39
+ * Version      : 1.0
+ */
+ application "Recruitment & Job Application Manage"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Job_Application_Form
+		{
+			displayname = "Job Application Form"
+			success message = "Application submitted successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Candidate_Name
+			(
+    			type = name
+				displayname = "Candidate Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 value = {"Mr.","Mrs.","Ms.","Dr."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Email_Address
+			(
+    			type = email
+				displayname = "Email Address"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Current_Address
+			(
+    			type = address
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "Latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "Longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Contact_Number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			LinkedIn_Profile
+			(
+    			type = text
+				displayname = "LinkedIn / Portfolio URL"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Cover_Letter
+			(
+    			type = textarea
+				displayname = "Cover Letter"
+				height = 120px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Years_Of_Experience
+			(
+				type = number
+				displayname = "Years of Experience"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Available_Joining_Date
+			(
+    			type = date
+				displayname = "Available Joining Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Preferred_Interview_Time
+			(
+    			type = time
+				displayname = "Preferred Interview Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Department_Applied_For
+			(
+				type = picklist
+				displayname = "Department Applied For"
+				values = {"Software Development","Data Science","Cloud / DevOps","Cybersecurity","UI / UX","Human Resources"}
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Employment_Type_Preferred
+			(
+				type = radiobuttons
+				displayname = "Employment Type Preferred"
+				values = {"Full-Time","Part-Time","Internship"}
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Key_Skills
+			(
+				type = list	
+				displayname = "Key Skills"
+				values = {"Java","Python","C","C++","SQL","React","Communication","Cloud"}
+				sortorder = ascending
+				height = 80px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Background_Verification_Consent
+			(
+    			type = checkbox
+				displayname = "Background Verification Consent"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit Application"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update Application"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list Candidate_Application_Report
+		{
+			displayName = "Candidate Application Report"
+			show all rows from Job_Application_Form    
+			(
+				Candidate_Name  as "Candidate Name"
+				Current_Address 
+				Email_Address as "Email Address"
+				Contact_Number as "Contact Number"
+				LinkedIn_Profile as "LinkedIn / Portfolio URL"
+				Cover_Letter as "Cover Letter"
+				Years_Of_Experience as "Years of Experience"
+				Available_Joining_Date as "Available Joining Date"
+				Preferred_Interview_Time as "Preferred Interview Time"
+				Department_Applied_For as "Department Applied For"
+				Employment_Type_Preferred as "Employment Type"
+				Key_Skills as "Key Skills"
+				Background_Verification_Consent as "Background Verification Consent"
+			)
+		}
+	}
+
+
+
+
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"HR Manager"
+				{
+					description = "HR users managing candidate applications."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form Job_Application_Form
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report Candidate_Application_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Candidate_Name as "Candidate Name"
+								Email_Address as "Email Address"
+								Department_Applied_For as "Department Applied For"
+								Employment_Type_Preferred as "Employment Type"
+								Years_Of_Experience as "Years of Experience"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Candidate_Name as "Candidate Name"
+								Email_Address as "Email Address"
+								Current_Address
+								Contact_Number as "Contact Number"
+								LinkedIn_Profile as "LinkedIn / Portfolio URL"
+								Cover_Letter as "Cover Letter"
+								Years_Of_Experience as "Years of Experience"
+								Available_Joining_Date as "Available Joining Date"
+								Preferred_Interview_Time as "Preferred Interview Time"
+								Department_Applied_For as "Department Applied For"
+								Employment_Type_Preferred as "Employment Type"
+								Key_Skills as "Key Skills"
+								Background_Verification_Consent as "Background Verification Consent"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Recruitment
+			{
+				displayname = "Recruitment"
+				icon = "business"
+
+				section Candidate_Management
+				{
+					displayname = "Candidate Management"
+					icon = "education-pencil-47"
+					form  Job_Application_Form
+					{
+						icon = "education-pencil-47"
+					}
+					report Candidate_Application_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Job_Application_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Job_Application_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = blue
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
