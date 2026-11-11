@@ -1,2 +1,2 @@
 # Low-Code
-Student Smart Spend Manager using Zoho Creator
+Recruitment Job Application Manage Assignment using ZOHO CREATOR
